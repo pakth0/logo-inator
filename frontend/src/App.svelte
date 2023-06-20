@@ -58,6 +58,7 @@
   <div class='container'>
     <div class="card" id='form'>
       <form on:submit|preventDefault={onSubmit}>
+        <h3>url must end in extension(.png/.jpg/.etc)</h3>
         <input style="!important margin-bottom: 8px" bind:this={urlField} on:change={typed} bind:value={lig} name='lig' id='url' type='text' placeholder="enter image URL">
         <input on:change={typed} bind:value={compName} name='name' id='url' type='text' placeholder="enter company name">
           <div style="padding-top: 4%; padding-bottom: 4%; margin-top: 8%; margin-bottom: 8%;">
@@ -65,14 +66,14 @@
             <p class="error-message">enter url & name</p>
             {/if}
           </div>       
-        <button type='submit' style='margin-top: 0%'>submit</button>
+        <button type='submit' style='margin-top: 0%'>download img</button>
         <br>
         <button on:click|preventDefault={batchProcess} style='margin-top: 30%; color: white; background-color: green;'>batch process</button>
         <button on:click|preventDefault={batchUpload} style='margin-top: 30%; color: white; background-color: red;'>batch upload</button>
       </form>
     </div>
     <div class="card" id='preview'>
-      <img src={previewImg} style="width: 300px; height: auto;" alt="Vite Logo" />
+      <img src={previewImg} style="width: 300px; height: auto;" alt="preview img" />
     </div>
   </div>
     
@@ -94,7 +95,7 @@
   }
 
   #url{
-    padding: 10% 2% 10% 5%;
+    padding: 10% 2% 10% 8%;
     margin-bottom: 25px;
     width: auto;
     font-size: large;

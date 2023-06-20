@@ -1,8 +1,7 @@
-from flask import Blueprint, request, send_file
-import base64
+from flask import Blueprint, request
 import requests
 from PIL import Image
-from rembg import new_session, remove
+from rembg import remove
 import boto3
 from botocore.exceptions import ClientError
 import os
