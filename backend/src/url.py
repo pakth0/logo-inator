@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 import requests
 from PIL import Image
-from rembg import remove
+import numpy as np
 import boto3
 from botocore.exceptions import ClientError
 import os
@@ -32,11 +32,10 @@ def batch_process():
     file_names = os.listdir('preprocessed')
     try:
         for thing in file_names:
-            input_path = f"preprocessed/{thing}"
-            output_path = f"postprocessed/{thing[0:find_dot(thing)]}.png"
-            input = Image.open(input_path)
-            output = remove(input)
-            output.save(output_path)
+            im = Image.open(f"preprocessed/{thing}")
+            print(im.getbbox())
+            im2 = im.crop(im.getbbox()) 
+            im2.save(f"postprocessed/{thing}")
     except:
         return {'success':False}, 400, {'ContentType':'application/json'}
     return {'success':True}, 200, {'ContentType':'application/json'}
@@ -64,7 +63,6 @@ def find_dot(slug):
 
 def find_extension(slug):
     return slug[find_dot(slug):]
-
 
 def upload_file(file_path, file_name):
     try:
